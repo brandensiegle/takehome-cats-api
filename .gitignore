@@ -1,0 +1,11 @@
+dist/*
+node_modules/*
+releases/*.zip
+releases/*.zip.base64sha256
+
+**/*.DS_Store
+
+.aws-sam/*
+logs.log
+
+build.zip

@@ -1,0 +1,36 @@
+# Template for running API locally using
+# npm start
+
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  LocalLambdaFunctionOverHttps:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: ./dist/index.handler
+      Runtime: nodejs14.x
+      Timeout: 10
+      MemorySize: 128
+      Environment:
+        Variables:
+          ENVIRONMENT: prod
+      Events:
+        HttpPost:
+          Type: Api
+          Properties:
+            Path: "/local/takehome"
+            Method: get
+            
+
+  LocalLambdaMockOptions:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: ./test/options.handler
+      Runtime: nodejs14.x
+      Timeout: 8
+      Events:
+        HttpOptions:
+          Type: Api
+          Properties:
+            Path: "/local/takehome"
+            Method: options
